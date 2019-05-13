@@ -5,7 +5,7 @@
 
 A tiny event-based Redux-like state manager **[Storeon]** for Angular.
 
-**[Online Demo]** 
+**[Online Demo]** | **[Demo with Angular Ivy]**
 
 * **Small** 578 bytes (minified and gzipped) **[sizes in bundlephobia]**
 
@@ -15,6 +15,7 @@ Read more about Storeon **[article]**.
 [Storeon]: https://github.com/storeon/storeon
 [article]: https://evilmartians.com/chronicles/storeon-redux-in-173-bytes
 [Online Demo]: https://stackblitz.com/edit/angular-storeon
+[Demo with Angular Ivy]:https://github.com/irustm/storeon-angular-ivy
 [sizes in bundlephobia]: https://bundlephobia.com/result?p=ng-storeon@0.0.1
 
 ## How to use
