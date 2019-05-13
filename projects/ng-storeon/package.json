@@ -3,6 +3,25 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0"
+    "@angular/core": "^7.0.0",
+    "storeon": "^0.8.3"
+  },
+  "license": "MIT",
+  "keywords": [
+    "storeon",
+    "ng soreon",
+    "angular storeon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irustm/ng-storeon.git"
+  },
+  "homepage": "https://github.com/irustm/ng-storeon",
+  "bugs": {
+    "url": "https://github.com/irustm/ng-storeon/issues"
+  },
+  "engines": {
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
   }
 }
