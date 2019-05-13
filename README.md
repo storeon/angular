@@ -5,13 +5,15 @@
 
 A tiny event-based Redux-like state manager **[Storeon]** for Angular.
 
+**[Online Demo]** 
+
 
 Read more about Storeon **[article]**.
 
 ---------------------
 [Storeon]: https://github.com/storeon/storeon
 [article]: https://evilmartians.com/chronicles/storeon-redux-in-173-bytes
-
+[Online Demo]: https://stackblitz.com/edit/angular-storeon
 
 ## How to use
 
