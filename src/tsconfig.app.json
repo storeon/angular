@@ -2,7 +2,15 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "ng-storeon": [
+        "../projects/ng-storeon"
+      ],
+      "ng-storeon/*": [
+        "../projects/ng-storeon"
+      ]
+    }
   },
   "exclude": [
     "test.ts",

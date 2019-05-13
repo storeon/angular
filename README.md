@@ -1,27 +1,74 @@
-# SroreonAngular
+# ng-storeon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
+<img src="https://storeon.github.io/storeon/logo.svg" align="right"
+     alt="Storeon logo by Anton Lovchikov" width="160" height="142">
 
-## Development server
+A tiny event-based Redux-like state manager **[Storeon]** for Angular.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+Read more about Storeon **[article]**.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---------------------
+[Storeon]: https://github.com/storeon/storeon
+[article]: https://evilmartians.com/chronicles/storeon-redux-in-173-bytes
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## How to use
 
-## Running unit tests
+```typescript
+import createStore from 'storeon'
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+// Initial state, reducers and business logic are packed in independent modules
+let increment = store => {
+  // Initial state
+  store.on('@init', () => ({ count: 0 }))
+  // Reducers returns only changed part of the state
+  store.on('inc', ({ count }) => ({ count: count + 1 }))
+}
 
-## Running end-to-end tests
+export const store = createStore([increment])
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+// your NgModule
 
-## Further help
+import { NgStoreonModule } from 'ng-storeon';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@NgModule({
+  imports: [NgStoreonModule], // NgStoreonModule
+  ...
+  providers: [{
+    provide: 'STOREON',
+    useValue: store  // your store
+  }],
+  ...
+```
+
+
+```typescript
+// your component
+
+import { Component, OnInit } from '@angular/core';
+import { NgStoreonService } from 'ng-storeon';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  changes: any;
+  dispath: any;
+  constructor(private ngstoreon: NgStoreonService) { }
+  title = 'sroreon-angular';
+
+  ngOnInit() {
+    const { dispatch, changes } = this.ngstoreon.useStoreon('count');
+    this.dispath = dispatch;
+    this.changes = changes;
+  }
+
+  updateState() {
+    this.dispath('inc');
+  }
+}
+
+```

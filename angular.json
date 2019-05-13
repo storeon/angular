@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "ng-storeon": {
+      "root": "projects/ng-storeon",
+      "sourceRoot": "projects/ng-storeon/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-storeon/tsconfig.lib.json",
+            "project": "projects/ng-storeon/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-storeon/src/test.ts",
+            "tsConfig": "projects/ng-storeon/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-storeon/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-storeon/tsconfig.lib.json",
+              "projects/ng-storeon/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sroreon-angular"
