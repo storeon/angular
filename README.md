@@ -7,7 +7,7 @@ A tiny event-based Redux-like state manager **[Storeon]** for Angular.
 
 **[Online Demo]** | **[Demo with Angular Ivy]**
 
-* **Small** 526 bytes (minified and gzipped). It uses [Size Limit] to control size.
+It is just 526 bytes (minified and gzipped) Angular module. It uses [Size Limit] to control size.
 
 Read more about Storeon **[article]**.
 
