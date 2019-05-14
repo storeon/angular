@@ -4,13 +4,21 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build ng-storeon",
     "build:lib": "ng build ng-storeon && node build.js",
-    "test": "ng test",
+    "size": "size-limit",
+    "test": "npm run build && size",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
+  "size-limit": [
+    {
+      "webpack": false,
+      "limit": "600 B",
+      "path": "dist/ng-storeon/esm2015/ng-storeon.js"
+    }
+  ],
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/common": "~7.0.0",
@@ -32,9 +40,9 @@
     "@angular/cli": "~7.0.5",
     "@angular/compiler-cli": "~7.0.0",
     "@angular/language-service": "~7.0.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -45,6 +53,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^4.2.0",
     "protractor": "~5.4.0",
+    "size-limit": "^1.3.2",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.29.0",
     "tslib": "^1.9.0",
