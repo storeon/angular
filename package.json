@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build ng-storeon",
-    "build:lib": "ng build ng-storeon && node build.js",
+    "build:lib": "ng build ng-storeon --prod && node build.js",
     "size": "size-limit",
     "test": "npm run build && size",
     "lint": "ng lint",
