@@ -8,6 +8,7 @@
     "build:lib": "ng build ng-storeon && node build.js",
     "size": "size-limit",
     "test": "npm run build && npm run size",
+    "test:lib": "ng test ng-storeon --watch false --browsers ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

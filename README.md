@@ -35,13 +35,13 @@ export const store = createStore([increment])
 
 // your NgModule
 
-import { NgStoreonModule } from 'ng-storeon';
+import { NgStoreonModule, STOREON } from '@storeon/angular';
 
 @NgModule({
   imports: [NgStoreonModule], // NgStoreonModule
   ...
   providers: [{
-    provide: 'STOREON',
+    provide: STOREON,
     useValue: store  // your store
   }],
   ...
@@ -52,7 +52,7 @@ import { NgStoreonModule } from 'ng-storeon';
 // your component
 
 import { Component, OnInit } from '@angular/core';
-import { NgStoreonService } from 'ng-storeon';
+import { NgStoreonService } from '@storeon/angular';
 
 @Component({
   selector: 'app-root',
