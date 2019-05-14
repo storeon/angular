@@ -1,5 +1,5 @@
 {
-  "name": "ng-storeon",
+  "name": "@storeon/angular",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
@@ -14,11 +14,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/irustm/ng-storeon.git"
+    "url": "https://github.com/storeon/angular.git"
   },
-  "homepage": "https://github.com/irustm/ng-storeon",
+  "homepage": "https://github.com/storeon/angular",
   "bugs": {
-    "url": "https://github.com/irustm/ng-storeon/issues"
+    "url": "https://github.com/storeon/angular/issues"
   },
   "engines": {
     "node": ">= 6.9.0",
