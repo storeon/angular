@@ -7,7 +7,7 @@
     "build": "ng build ng-storeon",
     "build:lib": "ng build ng-storeon --prod && node build.js",
     "size": "size-limit",
-    "test": "npm run build && size",
+    "test": "npm run build && npm run size",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
