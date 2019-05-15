@@ -16,7 +16,7 @@
     {
       "webpack": false,
       "limit": "600 B",
-      "path": "dist/ng-storeon/esm2015/ng-storeon.js"
+      "path": "dist/ng-storeon/esm2015/storeon-angular.js"
     }
   ],
   "dependencies": {
