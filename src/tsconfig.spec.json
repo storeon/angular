@@ -1,11 +1,17 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "../out-tsc/spec",
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "ng-storeon": [
+        "../projects/ng-storeon/src/public_api.ts"
+      ]
+    }
   },
   "files": [
     "test.ts",

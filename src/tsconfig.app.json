@@ -1,14 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "../out-tsc/app",
     "types": [],
     "paths": {
       "ng-storeon": [
-        "../projects/ng-storeon"
-      ],
-      "ng-storeon/*": [
-        "../projects/ng-storeon"
+        "../projects/ng-storeon/src/public_api.ts"
       ]
     }
   },

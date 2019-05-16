@@ -19,12 +19,7 @@
     ],
     "paths": {
       "ng-storeon": [
-        "./projects/ng-storeon",
-        "../projects/ng-storeon",
-      ],
-      "ng-storeon/*": [
-        "./projects/ng-storeon",
-        "../projects/ng-storeon",
+        "./projects/ng-storeon/src/public_api.ts"
       ]
     }
   }

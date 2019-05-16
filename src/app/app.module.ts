@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgStoreonModule } from 'projects/ng-storeon/src/public_api';
+import { NgStoreonModule, STOREON } from 'ng-storeon';
 
 import * as createStore from 'storeon';
 
-let increment = store => {
+const increment = store => {
   store.on('@init', () => ({ count: 0 }));
   store.on('inc', ({ count }) => ({ count: count + 1 }));
 };
+
 export const store = createStore([increment]);
 
 @NgModule({
@@ -23,7 +24,7 @@ export const store = createStore([increment]);
     NgStoreonModule
   ],
   providers: [{
-    provide: 'STOREON',
+    provide: STOREON,
     useValue: store
   }],
   bootstrap: [AppComponent]
