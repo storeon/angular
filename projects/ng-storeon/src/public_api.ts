@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ng-storeon
+ * Public API Surface of @storeon/angular
  */
 
 export * from './lib/ng-storeon.service';

@@ -8,7 +8,7 @@
       "node"
     ],
     "paths": {
-      "ng-storeon": [
+      "@storeon/angular": [
         "../projects/ng-storeon/src/public_api.ts"
       ]
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgStoreonService } from 'ng-storeon';
+import { NgStoreonService } from '@storeon/angular';
 import { Subject } from 'rxjs';
 
 @Component({

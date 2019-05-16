@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgStoreonModule, STOREON } from 'ng-storeon';
+import { NgStoreonModule, STOREON } from '@storeon/angular';
 
 import * as createStore from 'storeon';
 
