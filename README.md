@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
   changes: Subject<any>;
   dispatch: Function;
   constructor(private ngstoreon: NgStoreonService) { }
-  title = 'sroreon-angular';
+  title = 'storeon-angular';
 
   ngOnInit() {
     const { dispatch, changes } = this.ngstoreon.useStoreon('count');

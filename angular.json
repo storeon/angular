@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sroreon-angular": {
+    "storeon-angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sroreon-angular",
+            "outputPath": "dist/storeon-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sroreon-angular:build"
+            "browserTarget": "storeon-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sroreon-angular:build:production"
+              "browserTarget": "storeon-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sroreon-angular:build"
+            "browserTarget": "storeon-angular:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "sroreon-angular-e2e": {
+    "storeon-angular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "sroreon-angular:serve"
+            "devServerTarget": "storeon-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "sroreon-angular:serve:production"
+              "devServerTarget": "storeon-angular:serve:production"
             }
           }
         },
@@ -170,5 +170,5 @@
       }
     }
   },
-  "defaultProject": "sroreon-angular"
+  "defaultProject": "storeon-angular"
 }
