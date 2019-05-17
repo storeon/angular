@@ -2,10 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import * as createStore from 'storeon';
 import { NgStoreonService } from './ng-storeon.service';
 import { STOREON } from './storeon.token';
-import { Subject } from 'rxjs';
+
+const mockState = {testKey: '123'};
 
 const mockStore: createStore.Store = {
-  on: jasmine.createSpy('on'),
+  on: jasmine.createSpy('on').and.callFake((event, callback) => {
+    callback(mockState);
+  }),
   dispatch: jasmine.createSpy('dispatch'),
   get: () => {}
 };
@@ -17,13 +20,21 @@ describe('NgStoreonService', () => {
     ]
   }));
 
-  it('useStoreon should expose correct api: dispatch function and changes subject', () => {
+  it('should call storeon dispatch method', () => {
     const service: NgStoreonService = TestBed.get(NgStoreonService);
-    const { dispatch, changes } = service.useStoreon('test key');
+    service.dispatch('action', {data: '123'});
 
-    expect(dispatch).toEqual(mockStore.dispatch);
-    expect(changes).toEqual(new Subject());
+    expect(mockStore.dispatch).toHaveBeenCalledWith('action', {data: '123'});
   });
 
-  // TODO add test for checking that subject returns correct state for existing keys
+  it('should return state observable by property key', (done) => {
+    const service: NgStoreonService = TestBed.get(NgStoreonService);
+    const changes = service.useStoreon('testKey');
+
+    changes.subscribe(res => {
+      expect(res).toEqual(mockState.testKey);
+      done();
+    });
+  });
+
 });
