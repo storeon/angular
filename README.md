@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
   title = 'storeon-angular';
 
   ngOnInit() {
-    this.changes = = this.ngstoreon.useStoreon('count');;
+    this.changes = = this.ngstoreon.useStoreon('count');
   }
 
   updateState() {
