@@ -7,7 +7,7 @@ A tiny event-based Redux-like state manager **[Storeon]** for Angular.
 
 **[Online Demo]** | **[Demo with Angular Ivy]**
 
-It is just 526 bytes (minified and gzipped) Angular module. It uses [Size Limit] to control size.
+It is just 533 bytes (minified and gzipped) Angular module. It uses [Size Limit] to control size.
 
 Read more about Storeon **[article]**.
 
@@ -24,8 +24,12 @@ Read more about Storeon **[article]**.
 import * as createStore from 'storeon'
 import * as devTools from 'storeon/devtools';
 
+export interface State {
+  count: number
+}
+
 // Initial state, reducers and business logic are packed in independent modules
-let increment = store => {
+let increment = (store: createStore.Store<State>) => {
   // Initial state
   store.on('@init', () => ({ count: 0 }))
   // Reducers returns only changed part of the state
@@ -54,6 +58,7 @@ import { NgStoreonModule, STOREON } from '@storeon/angular';
 
 import { Component, OnInit } from '@angular/core';
 import { NgStoreonService } from '@storeon/angular';
+import { State } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -61,12 +66,12 @@ import { NgStoreonService } from '@storeon/angular';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  changes: Observable<any>;
-  constructor(private ngstoreon: NgStoreonService) { }
+  changes: Observable<number>;
+  constructor(private ngstoreon: NgStoreonService<State>) { }
   title = 'storeon-angular';
 
   ngOnInit() {
-    this.changes = = this.ngstoreon.useStoreon('count');
+    this.changes = this.ngstoreon.useStoreon('count');
   }
 
   updateState() {

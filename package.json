@@ -17,7 +17,7 @@
   "size-limit": [
     {
       "webpack": false,
-      "limit": "600 B",
+      "limit": "533 B",
       "path": "dist/ng-storeon/esm2015/storeon-angular.js"
     }
   ],
