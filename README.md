@@ -21,7 +21,8 @@ Read more about Storeon **[article]**.
 ## How to use
 
 ```typescript
-import createStore from 'storeon'
+import * as createStore from 'storeon'
+import * as devTools from 'storeon/devtools';
 
 // Initial state, reducers and business logic are packed in independent modules
 let increment = store => {
@@ -31,7 +32,7 @@ let increment = store => {
   store.on('inc', ({ count }) => ({ count: count + 1 }))
 }
 
-export const store = createStore([increment])
+export const store = createStore([increment, !environment.production && devTools])
 
 // your NgModule
 
@@ -60,19 +61,16 @@ import { NgStoreonService } from '@storeon/angular';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  changes: Subject<any>;
-  dispatch: Function;
+  changes: Observable<any>;
   constructor(private ngstoreon: NgStoreonService) { }
   title = 'storeon-angular';
 
   ngOnInit() {
-    const { dispatch, changes } = this.ngstoreon.useStoreon('count');
-    this.dispatch = dispatch;
-    this.changes = changes;
+    this.changes = = this.ngstoreon.useStoreon('count');;
   }
 
   updateState() {
-    this.dispatch('inc');
+    this.ngstoreon.dispatch('inc');
   }
 }
 
