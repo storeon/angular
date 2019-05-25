@@ -4,9 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-const libName = require('./package.json').name;
+const libFolder = 'ng-storeon';
 const rootFolder = path.join(__dirname);
-const distFolder = path.join(rootFolder, 'dist', libName);
+const distFolder = path.join(rootFolder, 'dist', libFolder);
 
 return Promise.resolve()
 

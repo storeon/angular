@@ -1,6 +1,7 @@
 {
-  "name": "ng-storeon",
-  "version": "0.0.0",
+  "name": "@storeon/angular",
+  "version": "0.1.0",
+  "description": "Storeon for Angular 🅰⚡",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
