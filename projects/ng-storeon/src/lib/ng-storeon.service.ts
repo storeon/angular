@@ -7,23 +7,24 @@ import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class NgStoreonService implements OnDestroy {
+export class NgStoreonService<State> implements OnDestroy {
 
-  private state$ = new BehaviorSubject(this.store.get());
+  private state$ = new BehaviorSubject<State>(this.store.get());
 
   private readonly unbind: Function;
 
-  constructor(@Inject(STOREON) private store: createStore.Store) {
+  constructor(@Inject(STOREON) private store: createStore.Store<State>) {
     this.unbind = this.store.on('@changed', (state) => {
-      this.state$.next({...state});
+      this.state$.next({...state as any});
 
       return null;
     });
   }
 
-  // TODO add typings
-  useStoreon(pathOrMapFn: ((state: any) => any) | string): Observable<any> {
-    let mapped$: Observable<any>;
+  useStoreon<K>(mapFn: (state: State) => K): Observable<K>;
+  useStoreon<K extends keyof State>(path: K): Observable<State[K]>;
+  useStoreon(pathOrMapFn: ((state: State) => any) | string): Observable<any> {
+    let mapped$;
 
     if (typeof pathOrMapFn === 'string') {
       mapped$ = this.state$.pipe(pluck(pathOrMapFn));

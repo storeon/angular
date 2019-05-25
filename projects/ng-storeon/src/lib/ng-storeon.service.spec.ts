@@ -21,14 +21,14 @@ describe('NgStoreonService', () => {
   }));
 
   it('should call storeon dispatch method', () => {
-    const service: NgStoreonService = TestBed.get(NgStoreonService);
+    const service: NgStoreonService<typeof mockState> = TestBed.get(NgStoreonService);
     service.dispatch('action', {data: '123'});
 
     expect(mockStore.dispatch).toHaveBeenCalledWith('action', {data: '123'});
   });
 
   it('should return state observable by property key', (done) => {
-    const service: NgStoreonService = TestBed.get(NgStoreonService);
+    const service: NgStoreonService<typeof mockState> = TestBed.get(NgStoreonService);
     const changes = service.useStoreon('testKey');
 
     changes.subscribe(res => {
