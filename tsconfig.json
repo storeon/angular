@@ -20,6 +20,9 @@
       "dom"
     ],
     "paths": {
+      "core-js/es7/reflect": [
+        "node_modules/core-js/proposals/reflect-metadata"
+      ],
       "@storeon/angular": [
         "./projects/ng-storeon/src/public_api.ts"
       ]
