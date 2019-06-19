@@ -7,7 +7,7 @@ import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class NgStoreonService<State> implements OnDestroy {
+export class StoreonService<State> implements OnDestroy {
 
   private state$ = new BehaviorSubject<State>(this.store.get());
 
@@ -15,7 +15,7 @@ export class NgStoreonService<State> implements OnDestroy {
 
   constructor(@Inject(STOREON) private store: createStore.Store<State>) {
     this.unbind = this.store.on('@changed', (state) => {
-      this.state$.next({...state as any});
+      this.state$.next({ ...state as any });
 
       return null;
     });

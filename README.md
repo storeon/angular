@@ -40,10 +40,10 @@ export const store = createStore([increment, !environment.production && devTools
 
 // your NgModule
 
-import { NgStoreonModule, STOREON } from '@storeon/angular';
+import { StoreonModule, STOREON } from '@storeon/angular';
 
 @NgModule({
-  imports: [NgStoreonModule], // NgStoreonModule
+  imports: [StoreonModule], // StoreonModule
   ...
   providers: [{
     provide: STOREON,
@@ -57,7 +57,7 @@ import { NgStoreonModule, STOREON } from '@storeon/angular';
 // your component
 
 import { Component, OnInit } from '@angular/core';
-import { NgStoreonService } from '@storeon/angular';
+import { StoreonService } from '@storeon/angular';
 import { State } from './app.module';
 
 @Component({
@@ -67,15 +67,15 @@ import { State } from './app.module';
 })
 export class AppComponent implements OnInit {
   changes: Observable<number>;
-  constructor(private ngstoreon: NgStoreonService<State>) { }
+  constructor(private storeon: StoreonService<State>) { }
   title = 'storeon-angular';
 
   ngOnInit() {
-    this.changes = this.ngstoreon.useStoreon('count');
+    this.changes = this.storeon.useStoreon('count');
   }
 
   updateState() {
-    this.ngstoreon.dispatch('inc');
+    this.storeon.dispatch('inc');
   }
 }
 
