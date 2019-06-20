@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgStoreonService } from './ng-storeon.service';
+import { StoreonService } from './storeon.service';
 
 @NgModule({
   declarations: [],
@@ -7,4 +7,4 @@ import { NgStoreonService } from './ng-storeon.service';
   providers: [],
   exports: []
 })
-export class NgStoreonModule { }
+export class StoreonModule { }

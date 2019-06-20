@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgStoreonModule, STOREON } from '@storeon/angular';
+import { StoreonModule, STOREON } from '@storeon/angular';
 import { environment } from '../environments/environment';
 
 import * as createStore from 'storeon';
@@ -29,7 +29,7 @@ export const store = createStore([increment, !environment.production && devTools
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgStoreonModule
+    StoreonModule
   ],
   providers: [{
     provide: STOREON,

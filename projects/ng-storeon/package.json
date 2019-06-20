@@ -1,16 +1,16 @@
 {
   "name": "@storeon/angular",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Storeon for Angular 🅰⚡",
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "storeon": "^0.8.3"
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1",
+    "storeon": "^0.8.5"
   },
   "license": "MIT",
   "keywords": [
     "storeon",
-    "ng soreon",
+    "ng storeon",
     "angular storeon"
   ],
   "repository": {
@@ -22,7 +22,7 @@
     "url": "https://github.com/storeon/angular/issues"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 10.0.0",
+    "npm": ">= 6.0.0"
   }
 }

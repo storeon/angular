@@ -2,14 +2,16 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "downlevelIteration": true,
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -18,6 +20,9 @@
       "dom"
     ],
     "paths": {
+      "core-js/es7/reflect": [
+        "node_modules/core-js/proposals/reflect-metadata"
+      ],
       "@storeon/angular": [
         "./projects/ng-storeon/src/public_api.ts"
       ]

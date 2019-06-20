@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgStoreonService } from '@storeon/angular';
+import { StoreonService } from '@storeon/angular';
 import { Observable } from 'rxjs';
 import { State } from './app.module';
 
@@ -9,24 +9,24 @@ import { State } from './app.module';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  changes: Observable<number>;
-  changes1: Observable<number>;
+  changes$: Observable<number>;
+  changes1$: Observable<number>;
 
   title = 'storeon-angular';
 
-  constructor(private ngstoreon: NgStoreonService<State>) { }
+  constructor(private storeon: StoreonService<State>) { }
 
   ngOnInit() {
-    this.changes = this.ngstoreon.useStoreon('count');
+    this.changes$ = this.storeon.useStoreon('count');
 
-    this.changes1 = this.ngstoreon.useStoreon('count1');
+    this.changes1$ = this.storeon.useStoreon('count1');
   }
 
   updateState() {
-    this.ngstoreon.dispatch('inc');
+    this.storeon.dispatch('inc');
   }
 
   updateState1() {
-    this.ngstoreon.dispatch('inc1');
+    this.storeon.dispatch('inc1');
   }
 }
