@@ -7,7 +7,7 @@ import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class StoreonService<State> implements OnDestroy {
+export class StoreonService<State, Reducers = any> implements OnDestroy {
 
   private state$ = new BehaviorSubject<State>(this.store.get());
 
@@ -42,7 +42,7 @@ export class StoreonService<State> implements OnDestroy {
     return mapped$.pipe(distinctUntilChanged());
   }
 
-  dispatch(event: string, data?: unknown) {
+  dispatch<K extends keyof Reducers>(event: K, data?: unknown) {
     this.store.dispatch(event, data);
   }
 

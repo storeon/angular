@@ -14,10 +14,21 @@ export interface State {
   count1: number;
 }
 
+export class Reducers {
+  'inc' = ({ count }) => ({ count: count + 1 });
+  'inc1' = ({ count1 }) => ({ count1: count1 + 1 });
+}
+
 const increment = (store: createStore.Store<State>) => {
   store.on('@init', () => ({ count: 0, count1: 0 }));
-  store.on('inc', ({ count }) => ({ count: count + 1 }));
-  store.on('inc1', ({ count1 }) => ({ count1: count1 + 1 }));
+
+  const effects = new Reducers();
+  for (const key in effects) {
+    if (effects.hasOwnProperty(key)) {
+      const effect = effects[key];
+      store.on(key, effect);
+    }
+  }
 };
 
 export const store = createStore([increment, !environment.production && devTools]);

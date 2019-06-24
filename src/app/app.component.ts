@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreonService } from '@storeon/angular';
 import { Observable } from 'rxjs';
-import { State } from './app.module';
+import { State, Reducers } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   title = 'storeon-angular';
 
-  constructor(private storeon: StoreonService<State>) { }
+  constructor(private storeon: StoreonService<State, Reducers>) { }
 
   ngOnInit() {
     this.changes$ = this.storeon.useStoreon('count');
