@@ -22,11 +22,11 @@ export class Reducers {
 const increment = (store: createStore.Store<State>) => {
   store.on('@init', () => ({ count: 0, count1: 0 }));
 
-  const effects = new Reducers();
-  for (const key in effects) {
-    if (effects.hasOwnProperty(key)) {
-      const effect = effects[key];
-      store.on(key, effect);
+  const reducers = new Reducers();
+  for (const key in reducers) {
+    if (reducers.hasOwnProperty(key)) {
+      const reducer = reducers[key];
+      store.on(key, reducer);
     }
   }
 };
