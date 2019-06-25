@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { StoreonModule, STOREON } from '@storeon/angular';
-import { environment } from '../environments/environment';
-
 import * as createStore from 'storeon';
 import * as devTools from 'storeon/devtools';
+
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MenuComponent } from './menu/menu.component';
+import { CounterComponent } from './counter/counter.component';
+import { Counter1Component } from './counter1/counter1.component';
 
 export interface State {
   count: number;
@@ -31,11 +34,14 @@ const increment = (store: createStore.Store<State>) => {
   }
 };
 
-export const store = createStore([increment, !environment.production && devTools]);
+export const defaultStore = createStore([increment, !environment.production && devTools]);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    CounterComponent,
+    Counter1Component,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,7 @@ export const store = createStore([increment, !environment.production && devTools
   ],
   providers: [{
     provide: STOREON,
-    useValue: store
+    useValue: defaultStore
   }],
   bootstrap: [AppComponent]
 })
