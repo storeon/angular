@@ -13,12 +13,25 @@ export class StoreonService<State, Reducers = any> implements OnDestroy {
 
   private readonly unbind: Function;
 
+  private initialized: boolean;
+
   constructor(@Inject(STOREON) private store: createStore.Store<State>) {
     this.unbind = this.store.on('@changed', (state) => {
       this.state$.next({ ...state as any });
 
       return null;
     });
+  }
+
+  initialize(reducers: any) {
+    if (this.initialized) { return; }
+    for (const key in reducers) {
+      if (reducers.hasOwnProperty(key)) {
+        const reducer = reducers[key];
+        this.store.on(key, reducer);
+      }
+    }
+    this.initialized = true;
   }
 
   useStoreon<K>(mapFn: (state: State) => K): Observable<K>;
