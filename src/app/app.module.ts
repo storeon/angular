@@ -16,14 +16,18 @@ export interface State {
   count: number;
 }
 
-export class Reducers {
-  'inc' = ({ count }) => ({ count: count + 1 });
+export interface Reducers {
+  'inc';
 }
+
+const nameof = <T>(name: keyof T) => name;
 
 const increment = (store: createStore.Store<State>) => {
   store.on('@init', () => ({
     count: 0
   }));
+
+  store.on(nameof<Reducers>('inc'), ({ count }) => ({ count: count + 1 }));
 };
 
 export const defaultStore = createStore([increment, !environment.production && devTools]);

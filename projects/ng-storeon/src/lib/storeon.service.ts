@@ -7,13 +7,11 @@ import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class StoreonService<State, Reducers = any> implements OnDestroy {
+export class StoreonService<State, Reducers = unknown> implements OnDestroy {
 
   private state$ = new BehaviorSubject<State>(this.store.get());
 
   private readonly unbind: Function;
-
-  private initialized: boolean;
 
   constructor(@Inject(STOREON) private store: createStore.Store<State>) {
     this.unbind = this.store.on('@changed', (state) => {
@@ -21,17 +19,6 @@ export class StoreonService<State, Reducers = any> implements OnDestroy {
 
       return null;
     });
-  }
-
-  initialize(reducers: any) {
-    if (this.initialized) { return; }
-    for (const key in reducers) {
-      if (reducers.hasOwnProperty(key)) {
-        const reducer = reducers[key];
-        this.store.on(key, reducer);
-      }
-    }
-    this.initialized = true;
   }
 
   useStoreon<K>(mapFn: (state: State) => K): Observable<K>;

@@ -15,7 +15,6 @@ export class CounterComponent implements OnInit {
   constructor(private storeon: StoreonService<State, Reducers>) { }
 
   ngOnInit() {
-    this.storeon.initialize(new Reducers());
     this.count$ = this.storeon.useStoreon('count');
   }
 
