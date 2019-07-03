@@ -9,7 +9,7 @@
     ],
     "paths": {
       "@storeon/angular": [
-        "../projects/ng-storeon/src/public_api.ts"
+        "../projects/ng-storeon/src/"
       ]
     }
   },
