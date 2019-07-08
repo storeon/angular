@@ -1,11 +1,11 @@
 {
   "name": "@storeon/angular",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Storeon for Angular 🅰⚡",
   "peerDependencies": {
     "@angular/common": "^8.1.0",
     "@angular/core": "^8.1.0",
-    "storeon": "^0.8.7"
+    "storeon": "^0.9.1"
   },
   "license": "MIT",
   "keywords": [

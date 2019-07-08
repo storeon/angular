@@ -26,6 +26,7 @@
       "@storeon/angular": [
         "./projects/ng-storeon/src/"
       ]
-    }
+    },
+    "esModuleInterop": true
   }
 }

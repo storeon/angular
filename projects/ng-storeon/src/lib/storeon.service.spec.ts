@@ -1,16 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import * as createStore from 'storeon';
+import createStore, { StoreonEvents } from 'storeon';
 import { StoreonService } from './storeon.service';
 import { STOREON } from './storeon.token';
 
 const mockState = { testKey: '123' };
+interface MockEvents extends StoreonEvents<typeof mockState> {
+  'action': { data: string };
+}
 
-const mockStore: createStore.Store = {
+const mockStore: createStore.Store<typeof mockState, MockEvents> = {
   on: jasmine.createSpy('on').and.callFake((event, callback) => {
     callback(mockState);
   }),
   dispatch: jasmine.createSpy('dispatch'),
-  get: () => { }
+  get: () => mockState
 };
 
 describe('StoreonService', () => {
@@ -21,14 +24,14 @@ describe('StoreonService', () => {
   }));
 
   it('should call storeon dispatch method', () => {
-    const service: StoreonService<typeof mockState> = TestBed.get(StoreonService);
+    const service: StoreonService<typeof mockState, MockEvents> = TestBed.get(StoreonService);
     service.dispatch('action', { data: '123' });
 
     expect(mockStore.dispatch).toHaveBeenCalledWith('action', { data: '123' });
   });
 
   it('should return state observable by property key', (done) => {
-    const service: StoreonService<typeof mockState> = TestBed.get(StoreonService);
+    const service: StoreonService<typeof mockState, MockEvents> = TestBed.get(StoreonService);
     const changes = service.useStoreon('testKey');
 
     changes.subscribe(res => {

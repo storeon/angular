@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { StoreonModule, STOREON } from '@storeon/angular';
-import * as createStore from 'storeon';
-import * as devTools from 'storeon/devtools';
+
+import createStore, { Module, StoreonEvents } from 'storeon';
+import devtools from 'storeon/devtools';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,25 +13,29 @@ import { MenuComponent } from './menu/menu.component';
 import { CounterComponent } from './counter/counter.component';
 import { Counter1Component } from './counter1/counter1.component';
 
+// State structure
 export interface State {
   count: number;
 }
 
-export interface Reducers {
-  'inc';
+// Events declaration: map of event names to type of event data
+export interface Events extends StoreonEvents<State> {
+  // `inc` event which does not go with any data
+  'inc': undefined;
 }
 
-const nameof = <T>(name: keyof T) => name;
-
-const increment = (store: createStore.Store<State>) => {
+// Initial state, reducers and business logic are packed in independent modules
+const counterModule: Module<State, Events> = store => {
+  // Initial state
   store.on('@init', () => ({
     count: 0
   }));
 
-  store.on(nameof<Reducers>('inc'), ({ count }) => ({ count: count + 1 }));
+  // Events
+  store.on('inc', ({ count }) => ({ count: count + 1 }));
 };
 
-export const defaultStore = createStore([increment, !environment.production && devTools]);
+export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
 
 @NgModule({
   declarations: [

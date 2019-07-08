@@ -27,35 +27,33 @@ Read more about Storeon **[article]**.
 ## How to use
 
 ```typescript
-import * as createStore from 'storeon';
-import * as devTools from 'storeon/devtools';
+import createStore, { Module, StoreonEvents } from 'storeon';
+import devtools from 'storeon/devtools';
 import { environment } from 'src/environments/environment';
 
+// State structure
 export interface State {
   count: number;
 }
 
-export class Reducers {
-  // Reducers return only changed part of the state
-  'inc' = ({ count }) => ({ count: count + 1 });
+// Events declaration: map of event names to type of event data
+export interface Events extends StoreonEvents<State> {
+  // `inc` event which does not go with any data
+  'inc': undefined;
 }
 
 // Initial state, reducers and business logic are packed in independent modules
-const increment = (store: createStore.Store<State>) => {
+const counterModule: Module<State, Events> = store => {
   // Initial state
-  store.on('@init', () => ({ count: 0 }))
+  store.on('@init', () => ({
+    count: 0
+  }));
 
-  // Boilerplate code to initialize reducers
-  const reducers = new Reducers();
-  for (const key in reducers) {
-    if (reducers.hasOwnProperty(key)) {
-      const reducer = reducers[key];
-      store.on(key, reducer);
-    }
-  }
+  // Events
+  store.on('inc', ({ count }) => ({ count: count + 1 }));
 };
 
-export const defaultStore = createStore([increment, !environment.production && devTools])
+export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
 
 // your NgModule
 
@@ -78,7 +76,7 @@ import { StoreonModule, STOREON } from '@storeon/angular';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoreonService } from '@storeon/angular';
-import { State, Reducers } from 'src/app/app.module';
+import { State, Events } from '../app.module';
 
 @Component({
   selector: 'app-root',
@@ -87,7 +85,7 @@ import { State, Reducers } from 'src/app/app.module';
 })
 export class AppComponent implements OnInit {
   changes: Observable<number>;
-  constructor(private storeon: StoreonService<State, Reducers>) { }
+  constructor(private storeon: StoreonService<State, Events>) { }
   title = 'storeon-angular';
 
   ngOnInit() {

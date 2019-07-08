@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { StoreonService } from '@storeon/angular';
-import { State, Reducers } from '../app.module';
+import { State, Events } from '../app.module';
 
 @Component({
   selector: 'app-counter',
@@ -12,7 +12,7 @@ import { State, Reducers } from '../app.module';
 export class CounterComponent implements OnInit {
   count$: Observable<number>;
 
-  constructor(private storeon: StoreonService<State, Reducers>) { }
+  constructor(private storeon: StoreonService<State, Events>) { }
 
   ngOnInit() {
     this.count$ = this.storeon.useStoreon('count');

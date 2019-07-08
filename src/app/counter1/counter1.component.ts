@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { StoreonService } from '@storeon/angular';
-import { State, Reducers } from '../app.module';
 
 @Component({
   selector: 'app-counter1',
