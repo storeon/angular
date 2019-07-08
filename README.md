@@ -18,25 +18,42 @@ Read more about Storeon **[article]**.
 [Demo with Angular Ivy]:https://github.com/irustm/storeon-angular-ivy
 [Size Limit]: https://github.com/ai/size-limit
 
+## Compatibility
+
+*@storeon/angular* **0.2.0**+ supports Angular **8**
+
+*@storeon/angular* **0.1.0** supports Angular **7**
+
 ## How to use
 
 ```typescript
-import * as createStore from 'storeon'
-import * as devTools from 'storeon/devtools';
+import createStore, { Module, StoreonEvents } from 'storeon';
+import devtools from 'storeon/devtools';
+import { environment } from 'src/environments/environment';
 
+// State structure
 export interface State {
-  count: number
+  count: number;
+}
+
+// Events declaration: map of event names to type of event data
+export interface Events extends StoreonEvents<State> {
+  // `inc` event which does not go with any data
+  'inc': undefined;
 }
 
 // Initial state, reducers and business logic are packed in independent modules
-let increment = (store: createStore.Store<State>) => {
+const counterModule: Module<State, Events> = store => {
   // Initial state
-  store.on('@init', () => ({ count: 0 }))
-  // Reducers returns only changed part of the state
-  store.on('inc', ({ count }) => ({ count: count + 1 }))
-}
+  store.on('@init', () => ({
+    count: 0
+  }));
 
-export const store = createStore([increment, !environment.production && devTools])
+  // Events
+  store.on('inc', ({ count }) => ({ count: count + 1 }));
+};
+
+export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
 
 // your NgModule
 
@@ -47,7 +64,7 @@ import { StoreonModule, STOREON } from '@storeon/angular';
   ...
   providers: [{
     provide: STOREON,
-    useValue: store  // your store
+    useValue: defaultStore  // your store
   }],
   ...
 ```
@@ -57,8 +74,9 @@ import { StoreonModule, STOREON } from '@storeon/angular';
 // your component
 
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { StoreonService } from '@storeon/angular';
-import { State } from './app.module';
+import { State, Events } from '../app.module';
 
 @Component({
   selector: 'app-root',
@@ -67,7 +85,7 @@ import { State } from './app.module';
 })
 export class AppComponent implements OnInit {
   changes: Observable<number>;
-  constructor(private storeon: StoreonService<State>) { }
+  constructor(private storeon: StoreonService<State, Events>) { }
   title = 'storeon-angular';
 
   ngOnInit() {

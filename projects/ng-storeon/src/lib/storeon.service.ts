@@ -1,13 +1,13 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
-import * as createStore from 'storeon';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { STOREON } from './storeon.token';
 import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
+import createStore from 'storeon';
+import { STOREON } from './storeon.token';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StoreonService<State> implements OnDestroy {
+export class StoreonService<State, Events> implements OnDestroy {
 
   private state$ = new BehaviorSubject<State>(this.store.get());
 
@@ -42,7 +42,7 @@ export class StoreonService<State> implements OnDestroy {
     return mapped$.pipe(distinctUntilChanged());
   }
 
-  dispatch(event: string, data?: unknown) {
+  dispatch<E extends Events, K extends keyof E>(event: K, data?: E[K]) {
     this.store.dispatch(event, data);
   }
 

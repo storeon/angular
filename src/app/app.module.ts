@@ -1,30 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { StoreonModule, STOREON } from '@storeon/angular';
+
+import createStore, { Module, StoreonEvents } from 'storeon';
+import devtools from 'storeon/devtools';
+
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreonModule, STOREON } from '@storeon/angular';
-import { environment } from '../environments/environment';
+import { MenuComponent } from './menu/menu.component';
+import { CounterComponent } from './counter/counter.component';
+import { Counter1Component } from './counter1/counter1.component';
 
-import * as createStore from 'storeon';
-import * as devTools from 'storeon/devtools';
-
+// State structure
 export interface State {
   count: number;
-  count1: number;
 }
 
-const increment = (store: createStore.Store<State>) => {
-  store.on('@init', () => ({ count: 0, count1: 0 }));
+// Events declaration: map of event names to type of event data
+export interface Events extends StoreonEvents<State> {
+  // `inc` event which does not go with any data
+  'inc': undefined;
+}
+
+// Initial state, reducers and business logic are packed in independent modules
+const counterModule: Module<State, Events> = store => {
+  // Initial state
+  store.on('@init', () => ({
+    count: 0
+  }));
+
+  // Events
   store.on('inc', ({ count }) => ({ count: count + 1 }));
-  store.on('inc1', ({ count1 }) => ({ count1: count1 + 1 }));
 };
 
-export const store = createStore([increment, !environment.production && devTools]);
+export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    CounterComponent,
+    Counter1Component,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +51,7 @@ export const store = createStore([increment, !environment.production && devTools
   ],
   providers: [{
     provide: STOREON,
-    useValue: store
+    useValue: defaultStore
   }],
   bootstrap: [AppComponent]
 })
