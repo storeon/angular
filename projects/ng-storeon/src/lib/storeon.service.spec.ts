@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import createStore, { StoreonEvents } from 'storeon';
+import { Store, StoreonEvents } from 'storeon';
 import { StoreonService } from './storeon.service';
 import { STOREON } from './storeon.token';
 
@@ -8,7 +8,7 @@ interface MockEvents extends StoreonEvents<typeof mockState> {
   'action': { data: string };
 }
 
-const mockStore: createStore.Store<typeof mockState, MockEvents> = {
+const mockStore: Store<typeof mockState, MockEvents> = {
   on: jasmine.createSpy('on').and.callFake((event, callback) => {
     callback(mockState);
   }),
