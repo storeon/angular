@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { StoreonModule, STOREON } from '@storeon/angular';
+import { STOREON } from '@storeon/angular';
 
 import createStore, { Module, StoreonEvents } from 'storeon';
 import devtools from 'storeon/devtools';
@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { CounterComponent } from './counter/counter.component';
 import { Counter1Component } from './counter1/counter1.component';
+import { HookCounterComponent } from './hook-counter/hook-counter.component';
 
 // State structure
 export interface State {
@@ -43,11 +44,11 @@ export const defaultStore = createStore<State, Events>([counterModule, !environm
     MenuComponent,
     CounterComponent,
     Counter1Component,
+    HookCounterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreonModule
   ],
   providers: [{
     provide: STOREON,
