@@ -9,13 +9,14 @@ import { STOREON } from './storeon.token';
 })
 export class StoreonService<State, Events extends StoreonEvents<State> = any> implements OnDestroy {
 
-  private state$ = new BehaviorSubject<State>(this.store.get());
+  private initialState = this.store.get();
+  private state = new BehaviorSubject<State>(this.initialState);
 
   private readonly unbind: Function;
 
   constructor(@Inject(STOREON) private store: Store<State, Events>) {
     this.unbind = this.store.on('@changed', (state) => {
-      this.state$.next({ ...state as any });
+      this.state.next({ ...state as any });
 
       return null;
     });
@@ -24,12 +25,12 @@ export class StoreonService<State, Events extends StoreonEvents<State> = any> im
   useStoreon<K>(mapFn: (state: State) => K): Observable<K>;
   useStoreon<K extends keyof State>(path: K): Observable<State[K]>;
   useStoreon(pathOrMapFn: ((state: State) => any) | string): Observable<any> {
-    let mapped$;
+    let mapped;
 
     if (typeof pathOrMapFn === 'string') {
-      mapped$ = this.state$.pipe(pluck(pathOrMapFn));
+      mapped = this.state.pipe(pluck(pathOrMapFn));
     } else if (typeof pathOrMapFn === 'function') {
-      mapped$ = this.state$.pipe(
+      mapped = this.state.pipe(
         map(source => pathOrMapFn(source))
       );
     } else {
@@ -39,7 +40,11 @@ export class StoreonService<State, Events extends StoreonEvents<State> = any> im
       );
     }
 
-    return mapped$.pipe(distinctUntilChanged());
+    return mapped.pipe(distinctUntilChanged());
+  }
+
+  clearStoreon() {
+    this.state.next(this.initialState);
   }
 
   dispatch<K extends keyof Events>(event: K, data?: Events[K]) {

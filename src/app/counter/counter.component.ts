@@ -22,4 +22,8 @@ export class CounterComponent implements OnInit {
     this.storeon.dispatch('inc');
   }
 
+  clear() {
+    this.storeon.clearStoreon();
+  }
+
 }
