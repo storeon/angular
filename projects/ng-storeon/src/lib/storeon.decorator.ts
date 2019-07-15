@@ -1,6 +1,6 @@
 import { ɵɵdirectiveInject as directiveInject } from '@angular/core';
 import { StoreonService } from './storeon.service';
-
+import { StoreonEvents } from 'storeon';
 
 /***
  *
@@ -8,7 +8,7 @@ import { StoreonService } from './storeon.service';
  * Patches the component with keys from storeon store
  *
  */
-export function UseStoreon<State, Events>(config: {
+export function UseStoreon<State, Events extends StoreonEvents<State> = any>(config: {
   keys: Array<keyof State>,
   dispatcher?: string
 }) {
@@ -17,13 +17,13 @@ export function UseStoreon<State, Events>(config: {
     cmpType.ngComponentDef.factory = () => {
       const cmp = originalFactory(cmpType.ngComponentDef.type);
 
-      const storeon = directiveInject<StoreonService<State, Events>>(StoreonService );
+      const storeon = directiveInject<StoreonService<State, Events>>(StoreonService);
 
       config.keys.forEach(key => cmp[key] = storeon.useStoreon(key));
 
-       if (config.dispatcher) {
-         cmp[config.dispatcher] = storeon.dispatch.bind(storeon);
-       }
+      if (config.dispatcher) {
+        cmp[config.dispatcher] = storeon.dispatch.bind(storeon);
+      }
 
       return cmp;
     };

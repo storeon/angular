@@ -20,6 +20,8 @@ Read more about Storeon **[article]**.
 
 ## Compatibility
 
+*@storeon/angular* **0.3.0**+ requires *storeon* **0.9.0**+
+
 *@storeon/angular* **0.2.0**+ supports Angular **8**
 
 *@storeon/angular* **0.1.0** supports Angular **7**
