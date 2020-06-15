@@ -7928,10 +7928,10 @@ static-extend@^0.1.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
-storeon@^0.9.5:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/storeon/-/storeon-0.9.7.tgz#a7a4a0523aaa92c9a18a3dabe02ae0c533fd0a8a"
-  integrity sha512-ppqkdDXX5P7CTN2jvwshA0/fmWebPYI8ls8G4BHafLKYCNh4FAyY3Dh6+40F5uVgd/fyTCUIJeJKOaXCIFJRKQ==
+storeon@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/storeon/-/storeon-3.0.2.tgz#0aff285487cba082d9830ebbb4fab3a768d79802"
+  integrity sha512-46heKtUF9j3iUo5hdnRNmWj9eASrQr16Ukh4u1Sp7SRmukPLu0Fmz+KO12eOn6jN1hdIumr6Ob2hmOrjod2kbw==
 
 stream-browserify@^2.0.1:
   version "2.0.2"
@@ -8427,10 +8427,15 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.4.5, typescript@~3.4.5:
+typescript@3.4.5:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
   integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
+
+typescript@~3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
+  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
 uglify-js@^3.1.4:
   version "3.7.3"
