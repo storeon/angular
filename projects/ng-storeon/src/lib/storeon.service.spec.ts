@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Store, StoreonEvents } from 'storeon';
+import { Dispatch, Store, StoreonEvents } from 'storeon';
+
 import { StoreonService } from './storeon.service';
 import { STOREON } from './storeon.token';
 
@@ -12,7 +13,7 @@ const mockStore: Store<typeof mockState, MockEvents> = {
   on: jasmine.createSpy('on').and.callFake((event, callback) => {
     callback(mockState);
   }),
-  dispatch: jasmine.createSpy('dispatch'),
+  dispatch: {} as Dispatch<MockEvents>,
   get: () => mockState
 };
 
@@ -24,10 +25,11 @@ describe('StoreonService', () => {
   }));
 
   it('should call storeon dispatch method', () => {
+    const dispatchMock = spyOn(mockStore, 'dispatch');
     const service: StoreonService<typeof mockState, MockEvents> = TestBed.get(StoreonService);
     service.dispatch('action', { data: '123' });
 
-    expect(mockStore.dispatch).toHaveBeenCalledWith('action', { data: '123' });
+    expect(dispatchMock).toHaveBeenCalledWith('action', { data: '123' });
   });
 
   it('should return state observable by property key', (done) => {
