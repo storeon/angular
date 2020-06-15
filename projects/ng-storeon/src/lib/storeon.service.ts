@@ -1,7 +1,8 @@
-import { Injectable, Inject, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
-import { Store, StoreonEvents } from 'storeon';
+import { StoreonEvents, StoreonStore } from 'storeon';
+
 import { STOREON } from './storeon.token';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class StoreonService<State, Events extends StoreonEvents<State> = any> im
 
   private readonly unbind: Function;
 
-  constructor(@Inject(STOREON) private store: Store<State, Events>) {
+  constructor(@Inject(STOREON) private store: StoreonStore<State, Events>) {
     this.unbind = this.store.on('@changed', (state) => {
       this.state$.next({ ...state as any });
 
