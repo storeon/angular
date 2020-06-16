@@ -6,6 +6,5 @@ cache:
 addons:
   chrome: stable
 script:
-  - npm install
   - npm run test
   - npm run test:lib
