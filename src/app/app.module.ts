@@ -1,18 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { STOREON } from '@storeon/angular';
-
-import createStore, { Module, StoreonEvents } from 'storeon';
-import devtools from 'storeon/devtools';
+import { createStoreon, StoreonEvents, StoreonModule } from 'storeon';
+import { storeonDevtools } from 'storeon/devtools';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
 import { CounterComponent } from './counter/counter.component';
 import { Counter1Component } from './counter1/counter1.component';
 import { HookCounterComponent } from './hook-counter/hook-counter.component';
+import { MenuComponent } from './menu/menu.component';
 
 // State structure
 export interface State {
@@ -26,7 +24,7 @@ export interface Events extends StoreonEvents<State> {
 }
 
 // Initial state, reducers and business logic are packed in independent modules
-const counterModule: Module<State, Events> = store => {
+const counterModule: StoreonModule<State, Events> = store => {
   // Initial state
   store.on('@init', () => ({
     count: 0
@@ -36,7 +34,7 @@ const counterModule: Module<State, Events> = store => {
   store.on('inc', ({ count }) => ({ count: count + 1 }));
 };
 
-export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
+export const defaultStore = createStoreon<State, Events>([counterModule, !environment.production && storeonDevtools]);
 
 @NgModule({
   declarations: [
