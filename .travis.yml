@@ -1,9 +1,11 @@
 language: node_js
 node_js: 10.13.0
 
+cache:
+  npm: false
 addons:
   chrome: stable
 script:
-  - yarn install
+  - npm install
   - npm run test
   - npm run test:lib
