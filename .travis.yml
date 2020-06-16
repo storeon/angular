@@ -4,5 +4,6 @@ node_js: 10.13.0
 addons:
   chrome: stable
 script:
+  - yarn install
   - npm run test
   - npm run test:lib
