@@ -20,6 +20,8 @@ Read more about Storeon **[article]**.
 
 ## Compatibility
 
+*@storeon/angular* **1.0.0**+ requires *storeon* **3.0.3**+
+
 *@storeon/angular* **0.3.0**+ requires *storeon* **0.9.0**+
 
 *@storeon/angular* **0.2.0**+ supports Angular **8**
@@ -29,8 +31,8 @@ Read more about Storeon **[article]**.
 ## How to use
 
 ```typescript
-import createStore, { Module, StoreonEvents } from 'storeon';
-import devtools from 'storeon/devtools';
+import { createStoreon, StoreonModule, StoreonEvents } from 'storeon';
+import { storeonDevtools } from 'storeon/devtools';
 import { environment } from 'src/environments/environment';
 
 // State structure
@@ -45,7 +47,7 @@ export interface Events extends StoreonEvents<State> {
 }
 
 // Initial state, reducers and business logic are packed in independent modules
-const counterModule: Module<State, Events> = store => {
+const counterModule: StoreonModule<State, Events> = store => {
   // Initial state
   store.on('@init', () => ({
     count: 0
@@ -55,7 +57,7 @@ const counterModule: Module<State, Events> = store => {
   store.on('inc', ({ count }) => ({ count: count + 1 }));
 };
 
-export const defaultStore = createStore<State, Events>([counterModule, !environment.production && devtools]);
+export const defaultStore = createStoreon<State, Events>([counterModule, !environment.production && storeonDevtools]);
 
 // your NgModule
 
@@ -107,7 +109,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UseStoreon } from '@storeon/angular';
 import { Events, State } from '../app.module';
-import { Dispatch } from 'storeon';
+import { StoreonDispatch } from 'storeon';
 
 @Component({
   selector: 'app-hook-counter',
@@ -118,7 +120,7 @@ import { Dispatch } from 'storeon';
 export class HookCounterComponent implements OnInit {
 
   count: Observable<number>;
-  dispatch: Dispatch<Events>;
+  dispatch: StoreonDispatch<Events>;
 
   constructor() { }
 
