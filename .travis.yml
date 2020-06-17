@@ -6,5 +6,3 @@ addons:
 script:
   - npm run test
   - npm run test:lib
-cache:
-  npm: false
