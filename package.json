@@ -1,6 +1,6 @@
 {
   "name": "@storeon/angular",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Storeon for Angular 🅰⚡",
   "scripts": {
     "ng": "ng",
@@ -13,55 +13,55 @@
     "test:lib": "ng test ng-storeon --watch false --browsers ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ivy-ngcc"
+    "postinstall": "ngcc"
   },
   "private": true,
   "size-limit": [
     {
       "webpack": false,
-      "limit": "533 B",
+      "limit": "569 B",
       "path": "dist/ng-storeon/esm2015/storeon-angular.js"
     }
   ],
   "dependencies": {
-    "@angular/animations": "~8.2.14",
-    "@angular/common": "~8.2.14",
-    "@angular/compiler": "~8.2.14",
-    "@angular/core": "~8.2.14",
-    "@angular/forms": "~8.2.14",
-    "@angular/platform-browser": "~8.2.14",
-    "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/router": "~8.2.14",
+    "@angular/animations": "~9.1.11",
+    "@angular/common": "~9.1.11",
+    "@angular/compiler": "~9.1.11",
+    "@angular/core": "~9.1.11",
+    "@angular/forms": "~9.1.11",
+    "@angular/platform-browser": "~9.1.11",
+    "@angular/platform-browser-dynamic": "~9.1.11",
+    "@angular/router": "~9.1.11",
     "core-js": "^3.1.4",
     "rxjs": "~6.5.5",
+    "tslib": "^1.10.0",
     "storeon": "^3.0.3",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.27",
-    "@angular-devkit/build-ng-packagr": "0.803.27",
-    "@angular/cli": "8.3.27",
-    "@angular/compiler-cli": "~8.2.14",
-    "@angular/language-service": "~8.2.14",
-    "@types/jasmine": "~3.3.13",
+    "@angular-devkit/build-angular": "~0.901.9",
+    "@angular-devkit/build-ng-packagr": "~0.901.9",
+    "@angular/cli": "~9.1.9",
+    "@angular/compiler-cli": "~9.1.11",
+    "@angular/language-service": "~9.1.11",
+    "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.6",
-    "@types/node": "~12.6.2",
-    "codelyzer": "^5.1.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.2.2",
     "fibers": "^4.0.1",
-    "jasmine-core": "~3.4.0",
+    "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.1.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.5",
-    "karma-jasmine": "~2.0.1",
+    "karma": "~5.0.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~2.1.0",
+    "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
-    "ng-packagr": "^5.7.0",
-    "protractor": "~5.4.2",
+    "ng-packagr": "^9.1.5",
+    "protractor": "~7.0.0",
     "size-limit": "^1.3.7",
     "ts-node": "~8.3.0",
-    "tsickle": "^0.35.0",
-    "tslib": "^1.13.0",
-    "tslint": "~5.18.0",
-    "typescript": "~3.4.0"
+    "tsickle": "^0.38.1",
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3"
   }
 }
