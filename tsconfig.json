@@ -28,5 +28,8 @@
       ]
     },
     "esModuleInterop": true
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }
