@@ -1,6 +1,6 @@
 {
   "name": "@storeon/angular",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Storeon for Angular 🅰⚡",
   "peerDependencies": {
     "@angular/common": "^9.1",
