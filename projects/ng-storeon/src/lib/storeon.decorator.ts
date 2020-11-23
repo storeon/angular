@@ -13,10 +13,11 @@ export function UseStoreon<State, Events extends StoreonEvents<State> = any>(con
   dispatcher?: string
 }) {
   return (cmpType) => {
-    const originalFactory = cmpType.ngComponentDef.factory;
-    cmpType.ngComponentDef.factory = () => {
-      const cmp = originalFactory(cmpType.ngComponentDef.type);
-
+    const isNg11 = !!cmpType.ɵfac;
+    const originalFactory = isNg11 ? cmpType.ɵfac : cmpType.ngComponentDef.factory;
+    const newFactory = () => {
+      const ngCompType = isNg11 ? cmpType.ɵcmp.type : cmpType.ngComponentDef.type;
+      const cmp = originalFactory(ngCompType);
       const storeon = directiveInject<StoreonService<State, Events>>(StoreonService);
 
       config.keys.forEach(key => cmp[key] = storeon.useStoreon(key));
@@ -28,5 +29,6 @@ export function UseStoreon<State, Events extends StoreonEvents<State> = any>(con
       return cmp;
     };
 
+    cmpType.ɵfac = newFactory;
   };
 }
