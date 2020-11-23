@@ -9,24 +9,26 @@ import { StoreonEvents } from 'storeon';
  *
  */
 export function UseStoreon<State, Events extends StoreonEvents<State> = any>(config: {
-  keys: Array<keyof State>,
-  dispatcher?: string
+	keys: Array<keyof State>,
+	dispatcher?: string
 }) {
-  return (cmpType) => {
-    const originalFactory = cmpType.ngComponentDef.factory;
-    cmpType.ngComponentDef.factory = () => {
-      const cmp = originalFactory(cmpType.ngComponentDef.type);
+	return (cmpType) => {
+		const isNg11 = !!cmpType.ɵfac;
+		const originalFactory = isNg11 ? cmpType.ɵfac : cmpType.ngComponentDef.factory;
+		const newFactory = () => {
+			const ngCompType = isNg11 ? cmpType.ɵcmp.type : cmpType.ngComponentDef.type;
+			const cmp = originalFactory(ngCompType);
+			const storeon = directiveInject<StoreonService<State, Events>>(StoreonService);
 
-      const storeon = directiveInject<StoreonService<State, Events>>(StoreonService);
+			config.keys.forEach(key => cmp[key] = storeon.useStoreon(key));
 
-      config.keys.forEach(key => cmp[key] = storeon.useStoreon(key));
+			if (config.dispatcher) {
+				cmp[config.dispatcher] = storeon.dispatch.bind(storeon);
+			}
 
-      if (config.dispatcher) {
-        cmp[config.dispatcher] = storeon.dispatch.bind(storeon);
-      }
+			return cmp;
+		};
 
-      return cmp;
-    };
-
-  };
+		cmpType.ɵfac = newFactory;
+	};
 }
